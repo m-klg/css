@@ -1,4 +1,5 @@
 <html> <!-- khaleghian  -->
+<title> footbal </title>
 <head>
 <style>
 *{
@@ -6,7 +7,9 @@
 	transform-style: preserve-3d;
 	perspective: 5000px;
 	overflow:hidden;
-	animation-duration: 5s;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;
 	margin:0;
 	padding:0;
 	border:none; /* solid */ /*none*/
@@ -29,18 +32,19 @@
 	width:100px;
 	height:100px;
 	border-radius: 50%;
-	background: #FFFF00;
-	animation-name: sunm;
-	bottom:75%;left:70%;translate:0 0 -50px;
+	background: radial-gradient(circle at 100px 100px, #FFFF00, #000);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+	animation-name: sun;
+	bottom:75%;left:70%;translate:0 0 300px;
 	transition:1s;
 }
 .sun:hover{
 	transform:scale(3);
 	z-index:60;
 }
-@keyframes sunm {
+@keyframes sun {
   from {bottom:0%; left:0%;translate:0 0 0;}
-  to {	bottom:75%;left:70%;translate:0 0 -50px;}
+  to {	bottom:75%;left:70%;translate:0 0 300px;}
 }
 
 .cloud{
@@ -53,7 +57,7 @@
 	animation-name: cloud;
 	opacity:.93;
 	z-index:50;
-	translate:0 0 60px;
+	translate:0 0 200px;
 	transition:1s;
 }
 @keyframes cloud {
@@ -82,7 +86,7 @@
 	bottom:85%; left:50%;translate:0 0 100px;
 	transition:1s;
 }
-.crce{
+.circulate{
 	position:absolute;
 	top:40%;
 	left:0%;
@@ -112,17 +116,19 @@
 }
 
 .qubHolder{
+	animation-iteration-count: infinite;
+
 	overflow: visible;;
-	position:fixed;
+	position: absolute;
 	width:100px;	
 	height:100px;
 	z-index:200; 
 	animation-name: mountain;
-	top:10%;left:10%; transform:translateZ(100px)  rotate3d(1, 0, 1, 45deg);
+	top:10%;left:10%; transform:translateZ(100px) rotate3d(1, 0, 1, 45deg);
 	transition: 2s;
 	}
 
-.qub{
+.qube{
 	position:absolute;
 	top:0%;
 	left:0%;
@@ -136,8 +142,8 @@
 	transform: scale(2);translateZ(100px) rotateX(var(--mouse-x)) rotateY(var(--mouse-y));
 }
 @keyframes mountain {
-  from {top:70%;left:40%; transform:translateZ(100px) rotate3d(1, 1, 1, 70deg);}
-  to {top:10%;left:10%; transform:translateZ(100px)  rotate3d(1, 0, 1, 45deg);}
+  from {transform:translateZ(100px) rotate3d(.1, .1, .1, 0deg);}
+  to {transform:translateZ(100px)  rotate3d(.1, .1, .1, 360deg);}
 }
 .halfGound{
 	color:white;
@@ -154,41 +160,42 @@
 	height:100%;
 }
 .ground{
+	transform-origin:center;
 	color:white;
 	border:solid;
-	z-index:2;
+	z-index:200;
 	overflow: visible;
-	transform-origin: bottom;
 	position:absolute;
 	margin:0;
 	padding:0;
-	left:0;
-	bottom:0;
-	width:100%;
-	height:100%;
+	left:10%;
+	bottom:10%;
+	width:80%;
+	height:80%;
 	transition:1s;
 	animation-name:gr;
-	transform:rotate3d(1, 0, 0, 60deg);
+	animation-iteration-count: 1;
+
 }
 .view{
+	overflow: visible;
 	transform-origin:bottom;
 	position:absolute;
 	left:0;
 	top:0;
 	width:100%;
 	height:100%;
-	animation-name:groundviewx;
 }
 @keyframes gr{
-	from {transform:rotate3d(1, 0, 0, 0);}
-	to {transform:rotate3d(1, 0, 0, 60deg);}
+	from {transform:rotate3d(0,0,1,0deg)}
+	to {transform:rotate3d(0,0,1,360deg)}
 }
 .groundview{
 	left:1%;
-	transform:rotate3d(1, 0, 0, 60deg);
+	transform:rotate3d(1, 0, 0, 70deg);
 }
 .ground:hover{
-	transform:rotate3d(1, 0, 0, 0deg);
+	transform:rotate3d(1, 0, 0, 70deg);
 	
 }
 .goal{
@@ -240,8 +247,8 @@ document.addEventListener('mousemove', function(event) {
 </script>
 <body>
 <div class="sky">
-	<div class="view">
-		<div class="ground">
+	<div class="view groundview">
+		<div class="ground" >
 
 			<!--img src="soccer.jpg" style="height: 100%;width: 100%;  display: block;"-->
 			<div class="halfGound" style="background: #468944; width:calc(50% - 4px); right:unset; left:0;"></div>	
@@ -254,19 +261,21 @@ document.addEventListener('mousemove', function(event) {
 			<div class="goal goalLeft goalGround"></div>
 			<div class="goal goalGround goalCenter"></div>
 			
+		
+	
+
+		<div class="qubHolder" >
+			<div class="qube" style="transform:rotateX(0) translateZ(50px);background: hsl(39,100%,90%);"></div>
+			<div class="qube" style="transform:rotateY(0) translateZ(-50px);background:hsl(39,100%,75%);"></div>
+			<div class="qube" style="transform:rotateY(90deg) translateZ(50px);background:hsl(39,100%,60%);"></div>
+			<div class="qube" style="transform:rotateY(90deg) translateZ(-50px);background:hsl(39,100%,45%);"></div>
+			<div class="qube" style="transform:rotateX(90deg) translateZ(50px);background:hsl(39,100%,30%);"></div>
+			<div class="qube" style="transform:rotateX(90deg) translateZ(-50px);background:hsl(39,100%,15%);"></div>
+		</div>
+		
 		</div>
 	</div>
-
-	<div class="qubHolder" >
-		<div class="qub" style="transform:rotateX(0) translateZ(50px);background:#FFFF00;"></div>
-		<div class="qub" style="transform:rotateY(0) translateZ(-50px);background:#00FFFF;"></div>
-		<div class="qub" style="transform:rotateY(90deg) translateZ(50px);background:#FF00FF;"></div>
-		<div class="qub" style="transform:rotateY(90deg) translateZ(-50px);background:#FFFFFF;"></div>
-		<div class="qub" style="transform:rotateX(90deg) translateZ(50px);background:#00FF00;"></div>
-		<div class="qub" style="transform:rotateX(90deg) translateZ(-50px);background:#000000;"></div>
-	</div>
 	
-	<div class="sun"></div>
 	
 	<div class="cloud" >
 		<div class="crc" style="scale:1.2;rotate:0deg;background: #FFFFFF;"></div>
@@ -276,10 +285,16 @@ document.addEventListener('mousemove', function(event) {
 	</div>
 	
 	<div class="plane" >
-		<div class="crce" style="rotate:0deg;background: #0000FF;"></div>
-		<div class="crce" style="rotate:90deg;background: #0000FF;"></div>
+		<div class="circulate" style="rotate:0deg;background: #0000FF;"></div>
+		<div class="circulate" style="rotate:90deg;background: #0000FF;"></div>
 	</div>
+	
+	
+	
+		<figure class="sun"></figure>
+
 </div>
+
 
 </body>
 </html>
